@@ -9,20 +9,20 @@ function updateContactsStorage(contacts) {
 }
 
 // Повертає масив контактів.
-export async function listContacts() {
+async function listContacts() {
   const data = await fs.readFile(contactsPath);
   return JSON.parse(data);
 }
 
 // Повертає об'єкт контакту з таким id. Повертає null, якщо контакт з таким id не знайдений.
-export async function getContactById(id) {
+async function getContactById(id) {
   const contacts = await listContacts();
   const result = contacts.find((item) => item.id === id);
   return result || null;
 }
 
 // Повертає об'єкт видаленого контакту. Повертає null, якщо контакт з таким id не знайдений.
-export async function removeContact(id) {
+async function removeContact(id) {
   const contacts = await listContacts();
   const index = contacts.findIndex((item) => item.id === id);
   if (index === -1) {
@@ -34,7 +34,7 @@ export async function removeContact(id) {
 }
 
 // Повертає об'єкт доданого контакту.
-export async function addContact(name, email, phone) {
+async function addContact(name, email, phone) {
   const contacts = await listContacts();
   const newContact = {
     id: nanoid(),
